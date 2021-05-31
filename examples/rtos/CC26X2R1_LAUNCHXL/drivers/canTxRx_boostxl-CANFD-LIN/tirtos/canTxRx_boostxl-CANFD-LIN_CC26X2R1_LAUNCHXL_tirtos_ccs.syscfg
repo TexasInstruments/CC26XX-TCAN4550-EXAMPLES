@@ -1,0 +1,83 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --board "/ti/boards/CC26X2R1_LAUNCHXL" --product "simplelink_cc13x2_26x2_sdk@4.40.00.44"
+ * @versions {"data":"2021010520","timestamp":"2021010520","tool":"1.7.0+1746","templates":null}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const CCFG  = scripting.addModule("/ti/devices/CCFG");
+const GPIO  = scripting.addModule("/ti/drivers/GPIO");
+const GPIO1 = GPIO.addInstance();
+const GPIO2 = GPIO.addInstance();
+const GPIO3 = GPIO.addInstance();
+const GPIO4 = GPIO.addInstance();
+const GPIO5 = GPIO.addInstance();
+const RTOS  = scripting.addModule("/ti/drivers/RTOS");
+const SPI   = scripting.addModule("/ti/drivers/SPI", {}, false);
+const SPI1  = SPI.addInstance();
+const UART  = scripting.addModule("/ti/drivers/UART", {}, false);
+const UART1 = UART.addInstance();
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+CCFG.ccfgTemplate.$name = "ti_devices_CCFGTemplate0";
+
+GPIO1.$hardware         = system.deviceData.board.components.LED_RED;
+GPIO1.$name             = "CONFIG_GPIO_LED_0";
+GPIO1.pinInstance.$name = "CONFIG_PIN_0";
+
+GPIO2.$hardware         = system.deviceData.board.components.LED_GREEN;
+GPIO2.$name             = "CONFIG_GPIO_LED_1";
+GPIO2.pinInstance.$name = "CONFIG_PIN_4";
+
+GPIO3.$name             = "Board_TCAN4550_IRQ";
+GPIO3.pull              = "Pull Up";
+GPIO3.interruptTrigger  = "Falling Edge";
+GPIO3.gpioPin.$assign   = "boosterpack.31";
+GPIO3.pinInstance.$name = "CONFIG_PIN_5";
+
+GPIO4.$name              = "Board_GPIO_TCAN4550_CS";
+GPIO4.mode               = "Output";
+GPIO4.outputStrength     = "High";
+GPIO4.initialOutputState = "High";
+GPIO4.gpioPin.$assign    = "boosterpack.13";
+GPIO4.pinInstance.$name  = "CONFIG_PIN_6";
+
+GPIO5.$name              = "Board_GPIO_TLIN_EN";
+GPIO5.mode               = "Output";
+GPIO5.outputStrength     = "High";
+GPIO5.initialOutputState = "High";
+GPIO5.gpioPin.$assign    = "boosterpack.8";
+GPIO5.pinInstance.$name  = "CONFIG_PIN_7";
+
+SPI1.$name                 = "Board_SPI0";
+SPI1.$hardware             = system.deviceData.board.components.LP_SPI;
+SPI1.sclkPinInstance.$name = "CONFIG_PIN_1";
+SPI1.misoPinInstance.$name = "CONFIG_PIN_2";
+SPI1.mosiPinInstance.$name = "CONFIG_PIN_3";
+
+UART1.$name               = "CONFIG_UART_0";
+UART1.$hardware           = system.deviceData.board.components.XDS110UART;
+UART1.txPinInstance.$name = "CONFIG_PIN_8";
+UART1.rxPinInstance.$name = "CONFIG_PIN_9";
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+GPIO1.gpioPin.$suggestSolution         = "boosterpack.39";
+GPIO2.gpioPin.$suggestSolution         = "boosterpack.40";
+SPI1.spi.$suggestSolution              = "SSI0";
+SPI1.spi.sclkPin.$suggestSolution      = "boosterpack.7";
+SPI1.spi.misoPin.$suggestSolution      = "boosterpack.14";
+SPI1.spi.mosiPin.$suggestSolution      = "boosterpack.15";
+SPI1.spi.dmaRxChannel.$suggestSolution = "DMA_CH3";
+SPI1.spi.dmaTxChannel.$suggestSolution = "DMA_CH4";
+UART1.uart.$suggestSolution            = "UART0";
+UART1.uart.txPin.$suggestSolution      = "boosterpack.4";
+UART1.uart.rxPin.$suggestSolution      = "boosterpack.3";

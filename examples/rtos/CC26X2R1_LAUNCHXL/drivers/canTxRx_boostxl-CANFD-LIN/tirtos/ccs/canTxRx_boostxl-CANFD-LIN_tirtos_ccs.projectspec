@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="ARM"
+                deviceId="Cortex M.CC2642R1F"
+            />
+        </when>
+    </applicability>
+
+    <import spec="${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/kernel/tirtos/builds/cc13x2_cc26x2/release/ccs/tirtos_builds_cc13x2_cc26x2_release_ccs.projectspec"/>
+
+    <project
+        title="canTxRx_boostxl-CANFD-LIN Project"
+        name="canTxRx_boostxl-CANFD-LIN_CC26X2R1_LAUNCHXL_tirtos_ccs"
+        configurations="Debug"
+        toolChain="TI"
+        connection="TIXDS110_Connection.xml"
+        device="Cortex M.CC2642R1F"
+        ignoreDefaultDeviceSettings="true"
+        ignoreDefaultCCSSettings="true"
+        references="tirtos_builds_cc13x2_cc26x2_release_ccs"
+        products="sysconfig"
+        compilerBuildOptions="
+            -I${PROJECT_ROOT}
+            -I${PROJECT_ROOT}/${ConfigName}
+	    -I${PROJECT_ROOT}/application
+            -I${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source/ti/can/tcan4x5x
+    	    -I${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source/ti/can/can_drv_l	    
+            -DDeviceFamily_CC26X2
+	    -DUSE_SYSCFG
+            -I${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source
+            -I${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source/ti/posix/ccs
+            --silicon_version=7M4
+            --code_state=16
+            --little_endian
+            --display_error_number
+            --diag_warning=255
+            --diag_wrap=off
+            --gen_func_subsections=on
+            --float_support=FPv4SPD16
+            --symdebug:dwarf
+            -I${CG_TOOL_ROOT}/include
+        "
+        linkerBuildOptions="
+            -i${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source
+            -i${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/kernel/tirtos/packages
+            -i${PROJECT_BUILD_DIR}/syscfg
+            -lti_utils_build_linker.cmd.genlibs
+            -l${GENERATED_LIBRARIES}
+            -lti/devices/cc13x2_cc26x2/driverlib/bin/ccs/driverlib.lib
+            --warn_sections
+            --display_error_number
+            --diag_wrap=off
+            --rom_model
+            -i${CG_TOOL_ROOT}/lib
+            -llibc.a
+        "
+        enableSysConfigTool="true"
+        sysConfigBuildOptions="
+            --product ${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/.metadata/product.json
+            --compiler ccs
+        "
+        description="canTxRx_boostxl-CANFD-LIN RTOS project">
+
+        <property name="buildProfile" value="release"/>
+        <property name="isHybrid" value="true"/>
+        <group id="empty.SIMPLELINK_CC13X2_26X2_SDK.CC26X2R1_LAUNCHXL.drivers.TI"/>
+        <file path="../../tirtos/main_tirtos.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../can_task.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="application">
+        </file>
+        <file path="../../can_task.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="application">
+        </file>        
+        <file path="${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source/ti/can/can_drv_l/can_hw.c" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="can_drv_l">
+        </file>					
+        <file path="${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source/ti/can/can_drv_l/can_hw.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="can_drv_l">
+        </file>				
+        <file path="${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source/ti/can/can_drv_l/can_hw_config.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="can_drv_l">
+        </file>
+        <file path="${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source/ti/can/tcan4x5x/bsp_spi.c" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="tcan4x5x">
+        </file>					
+        <file path="${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source/ti/can/tcan4x5x/bsp_spi.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="tcan4x5x">
+        </file>									
+        <file path="${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source/ti/can/tcan4x5x/TCAN4x5x_Data_Structs.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="tcan4x5x">
+        </file>					
+        <file path="${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source/ti/can/tcan4x5x/TCAN4x5x_Reg.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="tcan4x5x">
+        </file>									
+        <file path="${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source/ti/can/tcan4x5x/TCAN4x5x_SPI.c" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="tcan4x5x">
+        </file>					
+        <file path="${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source/ti/can/tcan4x5x/TCAN4x5x_SPI.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="tcan4x5x">
+        </file>									
+        <file path="${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source/ti/can/tcan4x5x/TCAN4550.c" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="tcan4x5x">
+        </file>					
+        <file path="${COM_TI_SIMPLELINK_CC13X2_26X2_SDK_INSTALL_DIR}/source/ti/can/tcan4x5x/TCAN4550.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="tcan4x5x">
+        </file>													                             
+        <file path="../../tirtos/canTxRx_boostxl-CANFD-LIN_CC26X2R1_LAUNCHXL_tirtos_ccs.syscfg" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../README.md" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../tirtos/ccs/cc13x2_cc26x2_tirtos.cmd" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+    </project>
+</projectSpec>
